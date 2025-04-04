@@ -11,7 +11,7 @@ Board::Board() {
 
 Board::~Board() {
     // Clean up dynamically allocated bugs
-    for (Bug* bug : crawlers) {
+    for (Crawler* bug : crawlers) {
         delete bug;
     }
     crawlers.clear();
@@ -45,13 +45,13 @@ void Board::loadBugsFromFile(const std::string& filename) {
     file.close();
 }
 
-void Board::displayAllBugs() const {
+void Board::displayBugs() const {
     std::cout << "All Bugs:\n";
     std::cout << std::left << std::setw(5) << "ID" << std::setw(10) << "Type"
               << std::setw(10) << "Position" << std::setw(8) << "Size"
               << std::setw(10) << "Direction" << std::setw(8) << "Status\n";
 
-    for (const Bug* bug : crawlers) {
+    for (const Crawler* bug : crawlers) {
         std::cout << std::left << std::setw(5) << bug->getId()
                   << std::setw(10) << bug->getType()
                   << std::setw(10) << bug->getPosition().toString()
@@ -80,7 +80,7 @@ void Board::findBug(int bugId) const {
 }
 
 void Board::tapBoard() {
-    for (Bug* bug : crawlers) {
+    for (Crawlers* bug : crawlers) {
         if (bug->isAlive()) {
             bug->move();
             // Check for collisions after each move
@@ -90,7 +90,7 @@ void Board::tapBoard() {
 }
 
 void Board::displayLifeHistory() const {
-    for (const Bug* bug : crawlers) {
+    for (const Crawlers* bug : crawlers) {
         std::cout << bug->getId() << " " << bug->getType() << " Path: ";
         const auto& path = bug->getPath();
         for (const Position& pos : path) {
@@ -118,9 +118,9 @@ void Board::displayAllCells() const {
     for (int y = 0; y <= maxY; ++y) {
         for (int x = 0; x <= maxX; ++x) {
             Position current(x, y);
-            std::vector<const Bug*> bugsInCell;
+            std::vector<const Crawler*> bugsInCell;
 
-            for (const Bug* bug : crawlers) {
+            for (const Crawler* bug : crawlers) {
                 if (bug->getPosition() == current) {
                     bugsInCell.push_back(bug);
                 }
@@ -159,7 +159,7 @@ void Board::writeLifeHistoryToFile() const {
         throw std::runtime_error("Could not create output file");
     }
 
-    for (const Bug* bug : crawlers) {
+    for (const Crawler* bug : crawlers) {
         outFile << bug->getId() << " " << bug->getType() << " Path: ";
         const auto& path = bug->getPath();
         for (const Position& pos : path) {
@@ -178,7 +178,7 @@ void Board::writeLifeHistoryToFile() const {
 
 // Rule of Three implementations
 Board::Board(const Board& other) {
-    for (const Bug* bug : other.crawlers) {
+    for (const Crawler* bug : other.crawlers) {
         crawlers.push_back(bug->clone());
     }
 }
@@ -186,13 +186,13 @@ Board::Board(const Board& other) {
 Board& Board::operator=(const Board& other) {
     if (this != &other) {
         // Clear current bugs
-        for (Bug* bug : crawlers) {
+        for (Crawler* bug : crawlers) {
             delete bug;
         }
         crawlers.clear();
 
         // Copy bugs from other
-        for (const Bug* bug : other.crawlers) {
+        for (const Crawler* bug : other.crawlers) {
             crawlers.push_back(bug->clone());
         }
     }

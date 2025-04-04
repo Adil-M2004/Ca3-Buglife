@@ -34,8 +34,8 @@ int main()
             board.findBug(id);
             break;
             case 4: board.tapBoard(); break;
-            case 5: board.showBugPaths(); break;
-            case 6: board.showCells(); break;
+            case 5: board.displayLifeHistory(); break;
+            case 6: board.displayAllCells(); break;
             case 7: cout << "Goodbye!\n"; break;
             default: cout << "Invalid choice!\n";
         }

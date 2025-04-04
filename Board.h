@@ -4,14 +4,14 @@
 #include <vector>
 #include <list>
 #include <string>
-#include "Bug.h"
+#include "Crawler.h"
 
 class Board {
 private:
-    std::vector<Bug*> crawlers; // Vector to store pointers to Bug objects (polymorphic)
+    std::vector<Crawler*> crawlers; // Vector to store pointers to Bug objects (polymorphic)
 
     // Private helper methods
-    void loadBugsFromFile(const std::string& filename);
+    void loadCrawlerFromFile(const std::string& filename);
     void writeLifeHistoryToFile() const;
 
 public:
@@ -21,7 +21,7 @@ public:
 
     // Core functionality
     void initializeBoard();
-    void displayAllBugs() const;
+    void displayAllCrawler() const;
     void findBug(int bugId) const;
     void tapBoard();
     void displayLifeHistory() const;

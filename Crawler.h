@@ -1,31 +1,17 @@
 #ifndef CRAWLER_H
 #define CRAWLER_H
 
-#include <vector>
-#include <string>
+#include "Bug.h"
 
-using namespace std;
-
-struct Position
-{
-    int x;  // x coordinate
-    int y;  // y coordinate
-};
-
-class Crawler {
+class Crawler : public Bug {
 public:
-    int id;
-    Position position;
-    int direction;  // 1=N, 2=E, 3=S, 4=W
-    int size;
-    bool alive;
-    vector<Position> path;
+    // Constructor
+    Crawler(int id, const Position& pos, Direction dir, int size);
     
-    Crawler(int id, int x, int y, int dir, int size);
-    void move();
-    bool isWayBlocked();
-    string getDirectionName();
-    string getInfo();
+    // Override pure virtual functions from Bug base class
+    void move() override;
+    std::string getType() const override { return "Crawler"; }
+    Bug* clone() const override;
 };
 
-#endif //CRAWLER_H
+#endif // CRAWLER_H

@@ -32,7 +32,7 @@ void Hopper::move() {
             
         case Direction::EAST:
             // Check if we can hop the full length or hit the edge
-            if (position.x + hopLength > 9) { // Assuming 10x10 board
+            if (position.x + hopLength > 9) {
                 actualHop = 9 - position.x;
             }
             target.x += actualHop;
@@ -40,7 +40,7 @@ void Hopper::move() {
             
         case Direction::SOUTH:
             // Check if we can hop the full length or hit the edge
-            if (position.y + hopLength > 9) { // Assuming 10x10 board
+            if (position.y + hopLength > 9) {
                 actualHop = 9 - position.y;
             }
             target.y += actualHop;

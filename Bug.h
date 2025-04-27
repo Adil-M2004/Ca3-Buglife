@@ -1,3 +1,6 @@
+// https://www.youtube.com/watch?v=oIV2KchSyGQ
+// https://www.youtube.com/watch?v=JU8DbwBvOWE
+
 #ifndef BUG_H
 #define BUG_H
 
